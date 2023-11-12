@@ -1,0 +1,47 @@
+<<<<<<<<<< Test >>>>>>>>>>
+Timestamp: [20230121_144334]
+
+<<<<<<<<<< Options >>>>>>>>>>
+log_name: OURS_multi_QP37.log
+exp_name: exp/QP37_swin&multires_3_l2finetune/
+checkpoint_save_path: exp/QP37_swin&multires_3_l2finetune/ckp_520000.pt
+pbar_len: 160
+criterion:[
+  type: PSNR
+  unit: dB
+  ]
+
+loading model exp/QP37_swin&multires_3_l2finetune/ckp_520000.pt...
+> model exp/QP37_swin&multires_3_l2finetune/ckp_520000.pt loaded.
+
+<<<<<<<<<< Results >>>>>>>>>>
+BQMall_832x480_600.yuv: [31.30(dB)/86.74(SSIM)] -> [32.36(dB)/88.76(SSIM)] Delta:[1.06/2.02]
+BQSquare_416x240_600.yuv: [28.27(dB)/82.60(SSIM)] -> [29.52(dB)/84.35(SSIM)] Delta:[1.25/1.74]
+BQTerrace_1920x1080_600.yuv: [31.25(dB)/83.65(SSIM)] -> [31.99(dB)/84.99(SSIM)] Delta:[0.74/1.34]
+BasketballDrill_832x480_500.yuv: [31.59(dB)/82.22(SSIM)] -> [32.57(dB)/84.23(SSIM)] Delta:[0.98/2.01]
+BasketballDrive_1920x1080_500.yuv: [33.23(dB)/85.05(SSIM)] -> [34.08(dB)/86.51(SSIM)] Delta:[0.85/1.46]
+BasketballPass_416x240_500.yuv: [30.48(dB)/81.76(SSIM)] -> [31.61(dB)/84.17(SSIM)] Delta:[1.12/2.41]
+BlowingBubbles_416x240_500.yuv: [27.79(dB)/78.14(SSIM)] -> [28.62(dB)/80.75(SSIM)] Delta:[0.83/2.60]
+Cactus_1920x1080_500.yuv: [32.21(dB)/83.60(SSIM)] -> [33.06(dB)/85.17(SSIM)] Delta:[0.85/1.57]
+FourPeople_1280x720_600.yuv: [34.59(dB)/92.34(SSIM)] -> [35.75(dB)/93.76(SSIM)] Delta:[1.16/1.42]
+Johnny_1280x720_600.yuv: [36.38(dB)/92.21(SSIM)] -> [37.49(dB)/93.54(SSIM)] Delta:[1.12/1.33]
+Kimono_1920x1080_240.yuv: [34.41(dB)/87.63(SSIM)] -> [35.43(dB)/89.50(SSIM)] Delta:[1.02/1.87]
+KristenAndSara_1280x720_600.yuv: [35.89(dB)/93.35(SSIM)] -> [37.16(dB)/94.58(SSIM)] Delta:[1.27/1.23]
+ParkScene_1920x1080_240.yuv: [31.58(dB)/81.54(SSIM)] -> [32.24(dB)/83.30(SSIM)] Delta:[0.66/1.76]
+PartyScene_832x480_500.yuv: [27.80(dB)/80.40(SSIM)] -> [28.60(dB)/82.67(SSIM)] Delta:[0.80/2.27]
+PeopleOnStreet_2560x1600_150.yuv: [31.39(dB)/86.53(SSIM)] -> [32.88(dB)/88.86(SSIM)] Delta:[1.49/2.33]
+RaceHorses_416x240_300.yuv: [29.32(dB)/76.75(SSIM)] -> [30.18(dB)/79.05(SSIM)] Delta:[0.86/2.30]
+RaceHorses_832x480_300.yuv: [30.09(dB)/81.61(SSIM)] -> [30.70(dB)/83.20(SSIM)] Delta:[0.61/1.59]
+Traffic_2560x1600_150.yuv: [33.18(dB)/88.80(SSIM)] -> [34.06(dB)/90.23(SSIM)] Delta:[0.88/1.44]
+> PSNR_ori: [31.71] dB
+> PSNR_ave: [32.68] dB
+> PSNR_delta: [0.97] dB
+SSIM:
+> SSIM_ori: [84.72]
+> SSIM_ave: [86.53]
+> SSIM_delta: [1.82]
+TOTAL TIME: [0.9] h
+
+<<<<<<<<<< Goodbye >>>>>>>>>>
+Timestamp: [20230121_153829]
+PVD-PSNR:0.7506605518239878SD-PSNR:0.6268938714869658PVD-SSIM:0.010676713014912225SD-SSIM:0.015342235378302557

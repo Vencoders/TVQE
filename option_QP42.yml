@@ -1,0 +1,117 @@
+dataset:
+  train:  # LMDB
+    type: LDV_MFQEv2_qp42_R3_Dataset
+
+    # for lmdb
+    root: /data/dataset/LDV_MFQE/
+    gt_folder: train_308/raw/
+    lq_folder: train_308/HM16.5_LDP/QP42/
+
+    # for dataset
+    gt_path: ldv_mfqev2_R3_qp42_train_gt.lmdb
+    lq_path: ldv_mfqev2_R3_qp42_train_lq.lmdb
+    meta_info_fp: meta_info.txt
+    gt_size: 128  # ground truth patch size: gt_size * gt_size
+    use_flip: True
+    use_rot: True  # rotation per 90 degrees
+    random_reverse: False
+
+    # for datasampler
+    enlarge_ratio: 300  # enlarge dataset by randomly cropping.
+
+    # for dataloader
+    num_worker_per_gpu: 12  # 12 in total. mainly affect IO speed
+    batch_size_per_gpu: 32  # bs=32, divided by 4 GPUs
+
+  val:  # Disk IO
+    type: VideoTestLDV_MFQEv2_qp42_R3_Dataset
+    #root: /media/x/Database/MFQEv2/
+    gt_path: test_16/raw/
+    lq_path: test_16/HM16.5_LDP/QP42/
+    #meta_info_fp: meta_info.txt
+    #enlarge_ratio: 1
+    #use_flip: False
+    #use_rot: False
+    #random_reverse: False
+
+  test:
+    type: VideoTestLDV_MFQEv2_qp42_R3_Dataset
+    gt_path: test_18/raw/
+    lq_path: test_18/HM16.5_LDP/QP42/
+
+network:
+  radius: 3  # total num of input frame = 2 * radius + 1
+  swinunet:
+    load_path: exp/QP42/ckp_460000.pt
+    patch_size: 4
+    in_chans: 7
+    out_chans: 32
+    embed_dim: 48
+    depths: [2, 2, 2]
+    num_heads: [2, 2, 2]
+    window_size: 8
+    mlp_ratio: 1.
+    qkv_bias: False
+    qk_scale: 2
+
+  qenet:
+    dim: 32
+    heads: [1]
+
+train:
+#  exp_name: QP42_L2finetune   # default: timestr. None: ~
+  exp_name: QP42   # default: timestr. None: ~
+#  exp_name:  # default: timestr. None: ~
+  random_seed: 7
+  pre-val: True  # evaluate criterion before training, e.g., ori PSNR
+  num_iter: !!float 800000
+  interval_print: !!float 500
+  interval_val: !!float 20000  # also save model
+  pbar_len: 100
+
+#  optim:
+#    type: AdamW
+#    lr: !!float 1e-4  # init lr of scheduler
+#    betas: [0.9, 0.999]
+#    weight_decay: !!float 1e-4
+#
+#  scheduler:
+#    is_on: True
+#    type: CosineAnnealingRestartCyclicLR
+#    periods: [92000, 208000]
+#    restart_weights: [1,1]
+#    eta_mins: [0.0003,0.000001]
+
+  optim:
+    type: Adam
+    lr: !!float 1e-4  # init lr of scheduler
+    betas: [0.9, 0.999]
+    eps: !!float 1e-08
+
+  scheduler:
+    is_on: False
+    type: CosineAnnealingRestartLR
+    periods: [!!float 5e+4, !!float 5e+4, !!float 5e+4, !!float 5e+4, !!float 5e+4, !!float 5e+4]  # epoch interval
+    restart_weights: [1, 0.5, 0.5, 0.5, 0.5, 0.5]
+    eta_min: !!float 1e-7
+
+  loss:
+#    type: FFTLoss
+    type: CharbonnierLoss
+#    type: L2
+    eps: !!float 1e-6
+
+  criterion:
+    type: PSNR
+    unit: dB
+
+test:
+  log_name: OURS_QP42_new2.log
+  exp_name: exp/QP42_pre360000/
+  checkpoint_save_path: exp/QP42_pre360000/ours_QP42_1.pt
+#  restore_iter: !!float 140000
+  pbar_len: 160
+
+  criterion:
+    type: PSNR
+    unit: dB
